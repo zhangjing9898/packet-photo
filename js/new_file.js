@@ -1,5 +1,6 @@
 var canvasWidth=480;
 var canvasHeight=360;
+var timer=null;
 
 var canvas=document.getElementById("canvas");
 var context=canvas.getContext("2d");
@@ -25,6 +26,7 @@ image.onload=function(e){
 }
 
 function initCanvas(){
+	clearInterval(timer);
 	clippingRegion={x:Math.random()*(canvas.width-2*radius)+radius,y:Math.random()*(canvas.height-2*radius)+radius,r:radius};
 	draw(image,clippingRegion);
 }
@@ -45,12 +47,13 @@ function draw(image,clippingRegion){
 }
 
 function reset(){
+	clearInterval(timer);
 	initCanvas();
 }
 
 function show(){
 	
-	var timer=setInterval(
+	timer=setInterval(
 		function(){
 			clippingRegion.r+=20;
 			if(clippingRegion.r>2*Math.max(canvas.width,canvas.height))
